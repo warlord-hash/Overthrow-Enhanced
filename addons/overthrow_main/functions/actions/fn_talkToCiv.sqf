@@ -66,6 +66,12 @@ if (_isMayor) then
 			format["Fund clinic (-$%1)", _clinicFundPrice], OT_fnc_donateClinic
 		];
 	};
+
+	if !(_town in (server getVariable ["NATOabandoned",[]])) then {
+		_options pushBack [
+			"Ask to join the resistance", OT_fnc_townJoinResistance 
+		];
+	};
 };
 
 private _delivery = _civ getVariable ["OT_delivery",[]];

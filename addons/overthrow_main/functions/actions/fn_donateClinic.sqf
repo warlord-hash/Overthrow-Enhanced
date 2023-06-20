@@ -12,6 +12,6 @@ if (_town in (server getVariable ["NATOabandoned",[]])) then {
 	[_town, 15] call OT_fnc_stability;
 } else {
 	[_town, -10] call OT_fnc_stability;
-}
+};
 
 server setVariable [format["fundedclinic_%1", _town], true, true];

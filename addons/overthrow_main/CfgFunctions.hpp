@@ -275,6 +275,7 @@ class CfgFunctions
 			/* Mayor */
 			class donateToTown {};
 			class donateClinic {};
+			class townJoinResistance {};
 
 			/* Jobs */
 			class setJobWaypoint {};
