@@ -2,7 +2,7 @@ private _ob = player call OT_fnc_nearestObjective;
 _ob params ["_obpos","_obname"];
 
 if (_obname in (server getVariable ["NATOabandoned",[]])) exitWith {};
-if !(captive player) exitWith {hint "Cannot capture while wanted"};
+// if !(captive player) exitWith {hint "Cannot capture while wanted"};
 
 private _resources = server getVariable ["NATOresources",2000];
 private _countered = (server getVariable ["NATOattacking",""]) != "";

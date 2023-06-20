@@ -52,6 +52,11 @@ private _pergroup = 1;
 if(_numCiv > 8) then {_pergroup = 2};
 if(_numCiv > 16) then {_pergroup = 4};
 
+diag_log format["Overthrow Enhanced: spawning civilians at %1", _town];
+
+private _mayorGroup = [_town] call OT_fnc_spawnMayor;
+_groups pushBack _mayorGroup;
+
 while {_count < _numCiv} do {
 	private _groupcount = 0;
 	private _group = createGroup [civilian,true];

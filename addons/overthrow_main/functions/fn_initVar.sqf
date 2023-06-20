@@ -644,8 +644,10 @@ OT_allBLURifleMagazines = [];
 		spawner setVariable [format["facweapons%1",_name],_weapons,true];
 		spawner setVariable [format["facvehicles%1",_name],_vehicles,true];
 	};
-	if(_side > -1 && _numblueprints > 0) then {
-		OT_allFactions pushback [_name,_title,_side,_flag];
+	if((_side == 0 || _side == 2) && _numblueprints > 0) then {
+		if !(_name in ["rhs_faction_vvs_c", "rhs_faction_vdv_45", "rhs_faction_vpvo", "rhssaf_faction_un", "rhsgref_faction_un"]) then {
+			OT_allFactions pushback [_name,_title,_side,_flag];
+		}
 	};
 }foreach(_allFactions);
 

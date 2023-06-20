@@ -272,6 +272,10 @@ class CfgFunctions
 			class fireEmployee {};
 			class setVehicleWaypoint {};
 
+			/* Mayor */
+			class donateToTown {};
+			class donateClinic {};
+
 			/* Jobs */
 			class setJobWaypoint {};
 			class requestJobResistance {};
@@ -381,6 +385,7 @@ class CfgFunctions
 			class spawnNATOObjective {};
 			class spawnPolice {};
 			class spawnShops {};
+			class spawnMayor {};
 		};
 
 		/*
@@ -513,6 +518,7 @@ class CfgFunctions
 			class initShopkeeper {};
 			class initSniper {};
 			class initRecruit {};
+			class initMayor {};
 		};
 
 		/*

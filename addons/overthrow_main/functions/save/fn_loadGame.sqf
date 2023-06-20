@@ -18,6 +18,7 @@ private _cc = 0;
 	if(_key == "server") then {
 		{
 			_x params ["_subkey","_subval"];
+			diag_log format["Overthrow: Subkey is '%1', subval is '%2'", _subKey, _subVal];
 			if(!(toLower (_subkey select [0,4]) in ["cba_","bis_"])) then {
 				server setVariable [_subkey,_subval,true];
 			};
@@ -34,6 +35,8 @@ private _buildableHouses = [];
 private _hasList_buildableHouses = false;
 {
 	_x params ["_key","_val"];
+
+	diag_log format["Overthrow: Key is '%1', val is '%2'", _key, _val];
 
 	// copy, we might modify it
 	if (_val isEqualType []) then {_val = +_val;};

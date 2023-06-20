@@ -7,6 +7,7 @@ private _standing = [_town] call OT_fnc_support;
 private _civprice = [_town,"CIV",_standing] call OT_fnc_getPrice;
 private _influence = player getvariable "influence";
 private _money = player getVariable ["money",0];
+private _stability = (server getVariable [format["stability%1",_town],0]);
 
 private _options = [];
 
@@ -31,6 +32,7 @@ private _canMission = false;
 private _canTute = false;
 private _canGangJob = false;
 private _isShop = false;
+private _isMayor = false;
 
 if !((_civ getvariable ["shop",[]]) isEqualTo []) then {_canSellDrugs = true;_canRecruit = false;_canBuy=true;_canSell=true;_isShop = true};
 if (_civ getvariable ["carshop",false]) then {_canSellDrugs = true;_canRecruit = false;_canBuyVehicles=true};
@@ -41,11 +43,30 @@ if (_civ getvariable ["notalk",false]) then {_canSellDrugs = false;_canRecruit =
 if (_civ getvariable ["factionrep",false]) then {_canSellDrugs = false;_canRecruit = false;_canBuyGuns=false;_canIntel=false;_canMission=true};
 if (_civ getvariable ["crimleader",false]) then {_canSellDrugs = true;_canRecruit = false;_canBuyGuns=false;_canIntel=false;_canMission=false;_canGangJob=true};
 if (_civ getvariable ["criminal",false]) then {_canSellDrugs = true;_canRecruit = false;_canBuyGuns=false;_canIntel=false;_canMission=false};
+if (_civ getvariable ["criminal",false]) then {_canSellDrugs = false;_canRecruit = false;_canBuyGuns=false;_canIntel=false;};
+if (_civ getvariable ["mayor",false]) then {_canSellDrugs = false;_canRecruit = false;_canBuyGuns=false;_canIntel=false;_isMayor=true;};
 
 if (_civ call OT_fnc_hasOwner) then {_canRecruit = false;_canIntel = false;_canSellDrugs=false};
 
 if !((_civ getvariable ["garrison",""]) isEqualTo "") then {_canRecruit = false;_canIntel = false;_canSellDrugs=false};
 if !((_civ getvariable ["polgarrison",""]) isEqualTo "") then {_canRecruit = false;_canIntel = false;_canSellDrugs=false};
+
+if (_isMayor) then
+{
+	private _donationPrice = floor((1000/(1+_stability)/10)*1000);
+	_options pushBack [
+		format["Donate to town (-$%1)", _donationPrice], OT_fnc_donateToTown
+	];
+
+	private _fundedClinic = server getVariable [format["fundedclinic_%1", _town], false];
+	private _clinicFundPrice = floor((3000/(1+_stability)/10)*1000);
+	if !(_fundedClinic) then
+	{
+		_options pushBack [
+			format["Fund clinic (-$%1)", _clinicFundPrice], OT_fnc_donateClinic
+		];
+	};
+};
 
 private _delivery = _civ getVariable ["OT_delivery",[]];
 if((count _delivery) > 0) then {
